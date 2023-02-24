@@ -5,6 +5,13 @@ import logo from "./logo.svg";
 
 function Navbar() {
   const [showLinks, setShowLinks] = useState(false);
+  const containerRef = useRef(null);
+  const linksRef = useRef(null);
+
+  useEffect(() => {
+    const linksHight = linksRef.current.getBoundingClientRect().height;
+    containerRef.current.style.height = showLinks ? `${linksHight}px` : "0px";
+  }, [showLinks]);
 
   const toggleLinks = () => {
     setShowLinks(!showLinks);
@@ -20,11 +27,8 @@ function Navbar() {
           </button>
         </div>
 
-        <div
-          className="links-container"
-          style={{ height: showLinks ? `${links.length * 2.6}rem` : "0" }}
-        >
-          <ul className="links">
+        <div className="links-container" ref={containerRef}>
+          <ul className="links" ref={linksRef}>
             {links.map((l) => (
               <li key={l.id}>
                 <a href="#">{l.text}</a>
