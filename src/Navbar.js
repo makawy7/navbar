@@ -5,9 +5,11 @@ import logo from "./logo.svg";
 
 function Navbar() {
   const [showLinks, setShowLinks] = useState(false);
+
   const toggleLinks = () => {
     setShowLinks(!showLinks);
   };
+
   return (
     <nav>
       <div className="nav-center">
@@ -17,17 +19,20 @@ function Navbar() {
             <FaBars />
           </button>
         </div>
-        {showLinks && (
-          <div className="links-container show-container">
-            <ul className="links">
-              {links.map((l) => (
-                <li key={l.id}>
-                  <a href="#">{l.text}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+
+        <div
+          className="links-container"
+          style={{ height: showLinks ? `${links.length * 2.6}rem` : "0" }}
+        >
+          <ul className="links">
+            {links.map((l) => (
+              <li key={l.id}>
+                <a href="#">{l.text}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <ul className="social-icons">
           {social.map((s) => (
             <li key={s.id}>
